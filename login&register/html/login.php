@@ -82,7 +82,7 @@
                 
                 <hr>
 
-                <a href="register.html">New Staff? Register here</a>
+                <a href="register.php">New Staff? Register here</a>
             </form>
 
         </div>

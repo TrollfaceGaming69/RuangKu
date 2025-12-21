@@ -83,7 +83,7 @@
 
                 <button type="submit" class="reg-btn"><i class="fa-solid fa-user-plus"></i> Sign Up</button>
 
-                <p class="login-conf">already have an account? <a href="login.html">Sign in</a></p>
+                <p class="login-conf">already have an account? <a href="login.php">Sign in</a></p>
             </form>
         </div>
 

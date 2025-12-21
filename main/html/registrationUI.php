@@ -16,10 +16,14 @@
 
         <div class="function-btn">
             <div>
+                <a href="dashboard.php">
                 <button><i class="fa-solid fa-gear"></i>     Admin panel</button>
+                </a>
             </div> 
             <div>
+                <a href="rooms.php">
                 <button><i class="fa-solid fa-door-open"></i>      Rooms</button>
+                </a>
             </div>
         </div>
 

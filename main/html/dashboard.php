@@ -38,7 +38,7 @@ if (!isset($_SESSION['admin_id'])) {
         <div class="profile-logout-btn">
             <div>
                 <h3>
-                    <?php echo htmlspecialchars($_SESSION['admin_name']); ?>
+                    <?php echo htmlspecialchars($_SESSION['admin_username']); ?>
                 </h3>
             </div>
             <div>
@@ -153,7 +153,11 @@ if (!isset($_SESSION['admin_id'])) {
 
         <div class="room-list-header">
             <h2>Available Rooms</h2>
+
+            <a href="rooms.php">
             <button>Browse All <i class="fa-solid fa-arrow-right"></i></button>
+            </a>
+            
         </div>
 
         <div class="room-list-container">
@@ -172,7 +176,6 @@ if (!isset($_SESSION['admin_id'])) {
                         <span class="tag"><i class="fa-solid fa-video"></i> Projector</span>
                         <span class="tag">PC Gaming</span>
                         <span class="tag"><i class="fa-solid fa-wifi"></i> WiFi</span>
-                        <span class="tag-more">+2 more</span>
                     </div>
 
                     <button class="btn-view">View Details <i class="fa-solid fa-arrow-right"></i></button>
@@ -193,7 +196,6 @@ if (!isset($_SESSION['admin_id'])) {
                         <span class="tag"><i class="fa-solid fa-video"></i> Projector</span>
                         <span class="tag">Lighting Stage </span>
                         <span class="tag"><i class="fa-solid fa-wifi"></i> WiFi</span>
-                        <span class="tag-more">+2 more</span>
                     </div>
 
                     <button class="btn-view">View Details <i class="fa-solid fa-arrow-right"></i></button>
@@ -214,7 +216,6 @@ if (!isset($_SESSION['admin_id'])) {
                         <span class="tag"> Mixer Audio</span>
                         <span class="tag"><i class="fa-solid fa-wind"></i> AC</span>
                         <span class="tag"><i class="fa-solid fa-wifi"></i> WiFi</span>
-                        <span class="tag-more">+1more</span>
                     </div>
 
                     <button class="btn-view">View Details <i class="fa-solid fa-arrow-right"></i></button>
