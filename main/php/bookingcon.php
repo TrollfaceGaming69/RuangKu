@@ -1,29 +1,44 @@
 <?php
+session_start();
 
-$conn = new mysqli("localhost", "root", "", "mcc_booking_system");
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "ruangku";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$connection = mysqli_connect($host, $user, $password, $database);
 
-    $nama_event = $_POST['nama_event'];
-    $tgl_acara = $_POST['tgl_acara'];
-    $jam_mulai = $_POST['jam_mulai'];
-    $jam_selesai = $_POST['jam_selesai'];
-    $id_ruangan = $_POST['id_ruangan']; 
-    $id_peminjam = $_POST['id_peminjam']; 
-    
-    $sql_room = "SELECT nama_ruangan FROM Ruangan WHERE id_ruangan = '$id_ruangan'";
-    $result_room = $conn->query($sql_room);
-    $room_data = $result_room->fetch_assoc();
-    $nama_ruangan = $room_data['nama_ruangan'];
-
-    $sql_insert = "INSERT INTO Booking (tgl_acara, jam_mulai, jam_selesai, nama_event, id_peminjam, id_ruangan, status_terakhir) 
-                   VALUES ('$tgl_acara', '$jam_mulai', '$jam_selesai', '$nama_event', '$id_peminjam', '$id_ruangan', 'Pending')";
-
-    if ($conn->query($sql_insert) === TRUE) {
-        $last_id = $conn->insert_id; 
-
-    } else {
-        echo "Error: " . $sql_insert . "<br>" . $conn->error;
-    }
+if (!isset($_GET['id'])) {
+    header("Location: ../html/dashboard.php");
+    exit();
 }
+
+$no_booking = $_GET['id'];
+
+$sql = "SELECT b.no_booking, b.nama_event, b.tgl_acara, b.jam_mulai, b.jam_selesai, r.nama_ruangan 
+        FROM Booking b
+        JOIN Ruangan r ON b.id_ruangan = r.id_ruangan
+        WHERE b.no_booking = ?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $no_booking);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    
+    $booking_id     = $row['no_booking'];
+    $nama_ruangan   = $row['nama_ruangan'];
+    $nama_event     = $row['nama_event'];
+    
+    $tgl_acara_fmt  = date("d F Y", strtotime($row['tgl_acara']));
+    $jam_mulai_fmt  = date("H:i", strtotime($row['jam_mulai']));
+    $jam_selesai_fmt= date("H:i", strtotime($row['jam_selesai']));
+    
+} else {
+    echo "<script>alert('Data booking tidak ditemukan!'); window.location.href='../html/dashboard.php';</script>";
+    exit();
+}
+
 ?>
